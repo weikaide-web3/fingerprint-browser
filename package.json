@@ -1,0 +1,78 @@
+{
+  "name": "fingerprint-browser",
+  "version": "0.1.0",
+  "private": true,
+  "description": "macOS anti-detect fingerprint browser & multi-account workspace (AdsPower/MoreLogin style)",
+  "main": "out/main/index.js",
+  "author": "fingerprint-browser",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "preview": "electron-vite preview",
+    "start": "electron-vite preview",
+    "typecheck:node": "tsc --noEmit -p tsconfig.node.json",
+    "typecheck:web": "tsc --noEmit -p tsconfig.web.json",
+    "typecheck": "npm run typecheck:node && npm run typecheck:web",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:unit": "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration",
+    "test:e2e": "electron-vite build && node tests/e2e/ui-flow.mjs",
+    "rebuild": "electron-rebuild -f -w better-sqlite3",
+    "dist": "electron-vite build && electron-builder",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "electron-log": "^5.4.3",
+    "playwright-core": "^1.63.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "zustand": "^5.0.8"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^4.2.0",
+    "@swc/core": "^1.15.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/node": "^22.19.2",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.5",
+    "@vitejs/plugin-react": "^5.1.4",
+    "electron": "^44.5.1",
+    "electron-builder": "^26.15.3",
+    "electron-vite": "^4.0.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.14",
+    "vitest": "^5.0.3"
+  },
+  "build": {
+    "appId": "com.fingerprintbrowser.app",
+    "productName": "FingerprintBrowser",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "out/**/*",
+      "resources/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "resources",
+        "to": "resources",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "mac": {
+      "target": [
+        "dmg",
+        "dir"
+      ],
+      "category": "public.app-category.productivity",
+      "identity": null
+    }
+  }
+}

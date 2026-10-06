@@ -1,0 +1,51 @@
+# 依赖与构建产物
+node_modules/
+out/
+dist/
+release/
+
+# 日志与系统文件
+*.log
+.DS_Store
+npm-debug.log*
+
+# 虚拟环境 / 覆盖率
+.venv/
+coverage/
+
+# ---------------------------------------------------------------------------
+# 运行时数据：绝不进仓库。
+# app.db 里是真实的环境配置、代理 host:port 与凭据、账号密码 / TOTP、
+# passkey 私钥（safeStorage 加密，但密文本身也不该公开）；
+# profiles/ 下是每个环境的真实 Chromium user-data（Cookie、LocalStorage、历史）。
+# ---------------------------------------------------------------------------
+.data/
+*.db
+*.db-wal
+*.db-shm
+app.db*
+profiles/
+
+# E2E 隔离用的临时 userData（含 Chromium Session Storage / Network Persistent State）
+.e2e-userdata/
+
+# 测试与工具缓存。.vitest/ 里的 JSON 报告带绝对路径，会暴露本机用户名
+.vitest/
+.cache/
+*.tsbuildinfo
+
+# 本地配置与机密：环境变量、签名证书、描述文件、代理凭据
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.mobileprovision
+electron-builder.env
+*.local
+
+# 本地草稿 / 备份，不属于公开源码
+backups/
+scratch/
+tmp/
